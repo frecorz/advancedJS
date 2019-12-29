@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is, understanding call, apply and bind</h1>
+    <ul>
+        <li><button class="btn">learning JS</button></li>
+        <li><button class="btn">fundaments JS</button></li>
+        <li><button class="btn">advanced JS</button></li>
+    </ul>
+    <script>
+        // Estableshing this with Call
+        function sayHello() {
+            console.log(`Hi, my name is ${this.name} ${this.lastname}`)
+        }
+
+        const person = {
+            name: 'Ricardo',
+            lastname: 'Cortés'
+        }
+
+        sayHello.call(person)
+
+        // Estableshing this with Call and to pass args to the function
+
+        function walk(metters, direction) {
+            console.log(`${this.name} walks ${metters} metters to ${direction}`)
+        }
+
+        walk.call(person, 200, 'north')
+
+        // Estableshing this with Apply and to pass args to the function
+        const values = [1000, 'north']
+        walk.apply(person, values)
+
+        // Estableshing this in a new function using Bind
+
+        const manuel = {
+            name: 'Manuel',
+            lastname: 'Sanchez'
+        }
+
+        const manuelSayHello = sayHello.bind(manuel)
+        manuelSayHello()
+
+        // 
+
+        const buttons = document.getElementsByClassName('btn')
+        // buttons.forEach(button => {
+        //     button.onclick = () => alert('Learning!')
+        // });
+
+        // NodeList
+        Array.prototype.forEach.call(buttons, button => {
+            button.onclick = () => alert('Learning!')
+        })
+    </script>
+</body>
+</html>

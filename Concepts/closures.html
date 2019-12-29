@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is, understanding closures</h1>
+    <script>
+        // Closures
+
+        // IIFE
+        (function () {
+            let color = 'blue'
+
+            function printColor() {
+                console.log(color)
+            }
+
+            printColor()
+        })()
+
+        // with this, we can simulate private variables
+
+        function accountantNumbers (number) {
+            let n = number;
+            return {
+                increase: function () { n++ },
+                decrease: function () { n-- },
+                get: () => n
+            }
+        }
+
+        let number = accountantNumbers(2)
+        console.log(number.n)
+        console.log(number.get())
+        console.log(number.increase())
+        console.log(number.increase())
+        console.log(number.increase())
+        console.log(number.get())
+        console.log(number.decrease())
+        console.log(number.decrease())
+        console.log(number.get())
+    </script>
+</body>
+</html>

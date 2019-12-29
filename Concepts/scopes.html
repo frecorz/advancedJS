@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>We'll understand the scopes in JavaScript</h1>
+
+    <script>
+        // Global Scope
+        
+        var msj = "Hello World"
+        var $ = function (msj) {
+            console.log(`JS say: ${msj}`)
+        }
+
+        // Function Scope
+
+        // function printNumbers () {
+        //     for (var i = 0; i < 10; i++) {
+        //         // setTimeout(function () {
+        //         //     console.log(i)
+        //         // }, 100)
+
+        //         function eventualPrint(number) {
+        //             setTimeout(function () {
+        //                 console.log(number)
+        //             }, 100)
+        //         }
+
+        //         eventualPrint(i)
+        //     }
+        // }
+
+        // printNumbers()
+
+        // Block Scope
+
+        function printNumbers () {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(function () {
+                    console.log(i)
+                }, 100)
+            }
+        }
+
+        printNumbers()
+
+        // Module Scope
+        // <script type="module" src="index.js"></script>
+
+    </script>
+</body>
+</html>
