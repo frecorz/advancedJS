@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel Concepts/**/*.html"
+    "start": "parcel Concepts/**/*.html",
+    "dev": "live-server"
   },
   "keywords": [],
   "author": "Fredy Cortés",

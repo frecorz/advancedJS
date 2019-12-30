@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prototypes</title>
+</head>
+<body>
+    <h1>This is, understanding prototypes</h1>
+    <script>
+        // const naruto = {
+        //     name: 'Naruto Uzumaki'
+        // }
+        // naruto.sayHello = function () {
+        //     console.log(`Hi, my name is ${this.name}`)
+        // }
+        // naruto.sayHello()
+
+        // const sasuke = {
+        //     name: 'Sasuke Uchiha'
+        // }
+        // sasuke.sayHello = function () {
+        //     console.log(`Hi, my name is ${this.name}`)
+        // }
+        // sasuke.sayHello()
+
+        // Let's improve this
+
+        // function Ninja (name) {
+        //     const ninja = {
+        //         name
+        //     }
+        //     ninja.sayHello = function () {
+        //         console.log(`Hi, my name is ${this.name}`)
+        //     }
+        //     return ninja
+        // }
+
+        // const naruto = Ninja('Naruto Uzumaki')
+        // naruto.sayHello()
+
+        // const sasuke = Ninja('Sasuke Uchiha')
+        // sasuke.sayHello()
+
+        // Let's improve this more
+
+        // const ninjaMethods = {
+        //     sayHello: function () {
+        //         console.log(`Hi, I'm ${this.name}`)
+        //     }
+        // }
+
+        // function Ninja (name) {
+        //     const ninja = {
+        //         name
+        //     }
+        //     ninja.sayHello = ninjaMethods.sayHello
+        //     return ninja
+        // }
+
+        // const naruto = Ninja('Naruto Uzumaki')
+        // naruto.sayHello()
+
+        // const sasuke = Ninja('Sasuke Uchiha')
+        // sasuke.sayHello()
+
+        // Object.create
+
+        // //const newObject = Object.create(obj)
+        // const ninjaMethods = {
+        //     sayHello: function () {
+        //         console.log(`Hi, I'm ${this.name} and I'm in 7 team`)
+        //     }
+        // }
+
+        // function Ninja (name) {
+        //     const ninja = Object.create(ninjaMethods)
+        //     ninja.name = name
+        //     return ninja
+        // }
+
+        // const naruto = Ninja('Naruto Uzumaki')
+        // naruto.sayHello()
+
+        // const sasuke = Ninja('Sasuke Uchiha')
+        // sasuke.sayHello()
+
+        // Using prototype
+
+        // function Ninja (name) {
+        //     const ninja = Object.create(Ninja.prototype)
+        //     ninja.name = name
+        //     return ninja
+        // }
+
+        // Ninja.prototype.sayHello = function () {
+        //     console.log(`Hi, I'm ${this.name} and I'm in 7 team`)
+        // }
+
+        // const naruto = Ninja('Naruto Uzumaki')
+        // naruto.sayHello()
+
+        // const sasuke = Ninja('Sasuke Uchiha')
+        // sasuke.sayHello()
+
+        // Using keyword new
+
+        function Ninja (name) {
+            // this = Object.create(Ninja.prototype)
+            this.name = name
+            // return this
+        }
+
+        Ninja.prototype.sayHello = function () {
+            console.log(`Hi, I'm ${this.name} using new`)
+        }
+
+        const naruto = new Ninja('Naruto Uzumaki')
+        naruto.sayHello()
+
+        const sasuke = new Ninja('Sasuke Uchiha')
+        sasuke.sayHello()
+    </script>
+</body>
+</html>
