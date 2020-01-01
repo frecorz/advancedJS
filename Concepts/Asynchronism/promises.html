@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promises</title>
+</head>
+<body>
+    <h1>This is, understanding promises</h1>
+    <img id="pokeImage" alt="pokemon">
+    <a href="https://pokeapi.co/docs/v2.html">Here you can find the API documentation</a>
+    <script>
+        const urlApi = 'https://pokeapi.co/api/v2/:resource'
+
+        function fetchData (method, urlApi) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest()
+                xhr.open(method, urlApi, true)
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) resolve(JSON.parse(xhr.responseText))
+                        else {
+                            const err = new Error(`status response: ${xhr.status}`)
+                            reject(err)
+                        }
+                    }
+                }
+                xhr.send()
+            })
+        }
+
+        fetchData('GET', urlApi.replace(':resource', 'pokemon'))
+            .then(data => {
+                const pokemons = data.results
+                console.log(pokemons) // This return 20 pokemons in console
+                const charmanderUrl = pokemons[3].url
+                return fetchData('GET', charmanderUrl) // Chaining promise
+            })
+            .then(charmander => {
+                const srcImage = charmander.sprites.front_default
+                document.getElementById('pokeImage').src = srcImage
+                const name = charmander.name
+                const exp = charmander.base_experience
+                console.log(`My name is ${name} and my experience value is ${exp}`)
+                return fetchData('GET', charmander.species.url) // Chaining promise again
+            })
+            .then(specie => {
+                const habitat = specie.habitat.name
+                console.log(`My habitat is ${habitat}`)
+            })
+            .catch(console.error)
+
+    </script>
+</body>
+</html>
