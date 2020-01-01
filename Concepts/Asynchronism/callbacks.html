@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Callbacks</title>
+</head>
+<body>
+    <h1>This is, understanding callbacks</h1>
+    <script>
+        const urlApi = 'https://rickandmortyapi.com/api/:resource'
+        
+        function fetchData (method, urlApi, callback) {
+            let xhr = new XMLHttpRequest()
+            xhr.open(method, urlApi, true)
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) callback(null, JSON.parse(xhr.responseText))
+                    else {
+                        const err = new Error(`status response: ${xhr.status}`)
+                        callback(err, null)
+                    }
+                }
+            }
+            xhr.send()
+        }
+
+        const characters = urlApi.replace(':resource', 'character')
+
+        fetchData('GET', characters, function (err, data1) {
+            if (err) return console.log(err)
+            fetchData('GET', `${characters}/${data1.results[1].id}`, function (err, data2) {
+                if (err) return console.log(err)
+                fetchData('GET', data2.origin.url, function (err, data3) {
+                    if (err) return console.log(err)
+                    console.log(data1.results[1])
+                    console.log(data2.name)
+                    console.log(data3.name)
+                })
+            })
+        })
+
+    </script>
+</body>
+</html>
